@@ -44,8 +44,24 @@ public class Consumer {
                     String keys = me.getKeys();
                     String body = new String(me.getBody(), RemotingHelper.DEFAULT_CHARSET);
                     System.out.println("topic：" + topic + " tags: " + tags + " keys: " + keys + " body: " + body);
+
+                    if (keys.equals("key1")) {
+                        System.out.println("消息消费失败...");
+                        int a = 1 / 0;
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
+
+                    // 记录失败的次数
+                    int reconsumeTimes = me.getReconsumeTimes();
+                    System.out.println("reconsumeTimes: " + reconsumeTimes);
+                    // 失败次数达到==3，就返回消费成功
+                    if (reconsumeTimes == 3) {
+                        // 日志...
+                        // 做补偿机制
+                        return  ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                    }
                     return ConsumeConcurrentlyStatus.RECONSUME_LATER;
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
