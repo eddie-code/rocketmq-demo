@@ -23,14 +23,14 @@ public class Producer {
 
         DefaultMQProducer producer = new DefaultMQProducer("temp_quick_producer_name");
 
-        producer.setNamesrvAddr(Const.NAMESRV_ADDR_SINGLE);
+        producer.setNamesrvAddr(Const.NAMESRV_ADDR_MASTER_SLAVE);
 //        producer.setCreateTopicKey("AUTO_CREATE_TOPIC_KEY");
 //        producer.setVipChannelEnabled(false);
 
         producer.start();
 
         // 1. 创建消息
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             Message message = new Message("temp_quick_topic",
                     "TagA", // 标签
                     "key" + i, // 用户自定义的key, 唯一的标识

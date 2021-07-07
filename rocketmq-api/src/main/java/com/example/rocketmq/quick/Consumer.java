@@ -27,7 +27,7 @@ public class Consumer {
 
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("temp_quick_consumer_name");
 
-        consumer.setNamesrvAddr(Const.NAMESRV_ADDR_SINGLE);
+        consumer.setNamesrvAddr(Const.NAMESRV_ADDR_MASTER_SLAVE);
 
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
 
@@ -36,32 +36,29 @@ public class Consumer {
 
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
-            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
-                MessageExt me = list.get(0);
+            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
+                MessageExt me = msgs.get(0);
                 try {
                     String topic = me.getTopic();
                     String tags = me.getTags();
                     String keys = me.getKeys();
-                    String body = new String(me.getBody(), RemotingHelper.DEFAULT_CHARSET);
-                    System.out.println("topic：" + topic + " tags: " + tags + " keys: " + keys + " body: " + body);
+//					if(keys.equals("key1")) {
+//						System.err.println("消息消费失败..");
+//						int a = 1/0;
+//					}
 
-                    if (keys.equals("key1")) {
-                        System.out.println("消息消费失败...");
-                        int a = 1 / 0;
-                    }
-
+                    String msgBody = new String(me.getBody(), RemotingHelper.DEFAULT_CHARSET);
+                    System.err.println("topic: " + topic + ",tags: " + tags + ", keys: " + keys + ",body: " + msgBody);
                 } catch (Exception e) {
                     e.printStackTrace();
+//					int recousumeTimes = me.getReconsumeTimes();
+//					System.err.println("recousumeTimes: " + recousumeTimes);
+//					if(recousumeTimes == 3) {
+//						//		记录日志....
+//						//  	做补偿处理
+//						return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+//					}
 
-                    // 记录失败的次数
-                    int reconsumeTimes = me.getReconsumeTimes();
-                    System.out.println("reconsumeTimes: " + reconsumeTimes);
-                    // 失败次数达到==3，就返回消费成功
-                    if (reconsumeTimes == 3) {
-                        // 日志...
-                        // 做补偿机制
-                        return  ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-                    }
                     return ConsumeConcurrentlyStatus.RECONSUME_LATER;
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
@@ -69,8 +66,8 @@ public class Consumer {
         });
 
         consumer.start();
-        System.out.println("consumer start!");
+        System.err.println("consumer start...");
 
     }
-
 }
+
