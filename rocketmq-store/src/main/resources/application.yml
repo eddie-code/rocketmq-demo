@@ -1,7 +1,7 @@
 #dubbo:
 #  application:
-#    id: example-order
-#    name: example-order
+#    id: example-store
+#    name: example-store
 #    qosEnable: true
 #    qosPort: 22211
 #  protocol:
@@ -10,9 +10,9 @@
 #    port: 12343
 #  registry:
 #    address: zookeeper://192.168.8.108:2181?backup=192.168.8.240:2181,192.168.8.246:2181
-#    id: example-order-registry
+#    id: example-store-registry
 #  scan:
-#    basePackages: com.example.order.*
+#    basePackages: com.example.store.*
 logging:
   level:
     tk:
@@ -42,9 +42,9 @@ logging:
 #        extras: load,threadpool
 mybatis:
   mapper-locations: classpath:mapping/*.xml
-  type-aliases-package: com.example.order
+  type-aliases-package: com.example.store
 server:
-  port: 8001
+  port: 8002
   servlet:
     context-path: /
 spring:
@@ -65,7 +65,7 @@ spring:
     testWhileIdle: true
     timeBetweenEvictionRunsMillis: 60000
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.8.100:61337/example_order?characterEncoding=UTF-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true&useSSL=false
+    url: jdbc:mysql://192.168.8.100:61337/example_store?characterEncoding=UTF-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true
     useGlobalDataSourceStat: true
     username: root
     password: 123456
