@@ -59,6 +59,11 @@
             <artifactId>dubbo-spring-boot-actuator</artifactId>
             <version>${dubbo.version}</version>
         </dependency>
+        <dependency>
+            <artifactId>rocketmq-store-api</artifactId>
+            <groupId>com.example</groupId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!-- hysrtix -->
         <dependency>

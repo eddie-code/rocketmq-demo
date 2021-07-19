@@ -49,16 +49,21 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <!-- dubbo -->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.boot</groupId>-->
-<!--            <artifactId>dubbo-spring-boot-starter</artifactId>-->
-<!--            <version>${dubbo.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.boot</groupId>-->
-<!--            <artifactId>dubbo-spring-boot-actuator</artifactId>-->
-<!--            <version>${dubbo.version}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>${dubbo.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>dubbo-spring-boot-actuator</artifactId>
+            <version>${dubbo.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>rocketmq-store-api</artifactId>
+            <groupId>com.example</groupId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!-- hysrtix -->
         <dependency>

@@ -10,7 +10,8 @@
 		<module>rocketmq-pay-a</module>
 		<module>rocketmq-pay-b</module>
 		<module>rocketmq-pkg</module>
-	</modules>
+        <module>rocketmq-store-api</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
