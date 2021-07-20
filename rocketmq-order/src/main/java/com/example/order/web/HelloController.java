@@ -25,7 +25,7 @@ public class HelloController {
             // 服务版本，与服务提供者的版本一致
             version = "0.0.1",
             application = "${dubbo.application.id}",
-            interfaceName = "com.bfxy.store.service.HelloServiceApi",
+            interfaceName = "com.example.store.service.HelloServiceApi",
             check = false,
             timeout = 3000,
             // 读请求允许重试3次，写请求不要进行重试
