@@ -1,0 +1,79 @@
+dubbo:
+  application:
+    id: example-pkg
+    name: example-pkg
+    qosEnable: true
+    qosPort: 22211
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 12343
+  registry:
+    address: zookeeper://192.168.8.108:2181?backup=192.168.8.240:2181,192.168.8.246:2181
+    id: example-pkg-registry
+  scan:
+    basePackages: com.example.pkg.*
+logging:
+  level:
+    tk:
+      mybatis: TRACE
+# Enables Dubbo All Endpoints
+management:
+  endpoint:
+    dubbo:
+      enabled: true
+    dubbo-configs:
+      enabled: true
+    dubbo-properties:
+      enabled: true
+    dubbo-references:
+      enabled: true
+    dubbo-services:
+      enabled: true
+    dubbo-shutdown:
+      enabled: true
+  health:
+    dubbo:
+      # Dubbo Health
+      status:
+        ## StatusChecker Name defaults (default : "memory", "load" )
+        defaults: memory
+        ## StatusChecker Name extras (default : empty )
+        extras: load,threadpool
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.example.pkg
+server:
+  port: 8005
+  servlet:
+    context-path: /
+spring:
+  datasource:
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat,wall,log4j
+    initialSize: 5
+    maxActive: 100
+    maxIdle: 10
+    maxPoolPreparedStatementPerConnectionSize: 20
+    maxWait: 60000
+    minEvictableIdleTimeMillis: 300000
+    minIdle: 1
+    poolPreparedStatements: true
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.8.100:61337/example_pkg?characterEncoding=UTF-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true&useSSL=false
+    useGlobalDataSourceStat: true
+    username: root
+    password: 123456
+    validationQuery: SELECT 1 FROM DUAL
+  http:
+    encoding:
+      charset: UTF-8
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: NON_NULL
+    time-zone: GMT+8

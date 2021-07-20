@@ -24,15 +24,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.1.1</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.mybatis.spring.boot</groupId>-->
+        <!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
+        <!--            <version>1.1.1</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
-            <version>1.1.0</version>
+            <version>2.1.5</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
@@ -92,10 +92,15 @@
             <artifactId>rocketmq-client</artifactId>
             <version>${rocketmq.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
-        <finalName>example-store</finalName>
+        <finalName>example-order</finalName>
         <!-- 打包时包含properties、xml -->
         <resources>
             <resource>
@@ -109,6 +114,11 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
+                <!--                <includes>-->
+                <!--                    <include>**/*.properties</include>-->
+                <!--                    <include>**/*.yml</include>-->
+                <!--                    <include>**/*.xml</include>-->
+                <!--                </includes>-->
             </resource>
         </resources>
         <plugins>
@@ -116,9 +126,38 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.example.store.Application</mainClass>
+                    <fork>true</fork>
+                    <mainClass>com.example.order.Application</mainClass>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.6</version>
+                <configuration>
+                    <configurationFile>
+                        ${basedir}/src/main/resources/generator/generatorConfig.xml
+                    </configurationFile>
+                    <overwrite>true</overwrite>
+                    <verbose>true</verbose>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <!--对应 MySQL 驱动-->
+                        <version>8.0.17</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>tk.mybatis</groupId>
+                        <artifactId>mapper</artifactId>
+                        <!--mapper 版本-->
+                        <version>4.1.5</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
         </plugins>
     </build>
 
