@@ -87,6 +87,7 @@
             <artifactId>hystrix-javanica</artifactId>
             <version>${hystrix.version}</version>
         </dependency>
+        <!-- other -->
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-client</artifactId>
