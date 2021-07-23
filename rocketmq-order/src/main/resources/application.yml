@@ -41,7 +41,7 @@ management:
         ## StatusChecker Name extras (default : empty )
         extras: load,threadpool
 mybatis:
-  mapper-locations: classpath:mapping/*.xml
+  mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.example.order
 server:
   port: 8001

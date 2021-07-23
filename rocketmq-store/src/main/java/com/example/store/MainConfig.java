@@ -1,6 +1,6 @@
 package com.example.store;
 
-import org.mybatis.spring.annotation.MapperScan;
+import tk.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan(basePackages = {"com.example.store.*"})
-@MapperScan(basePackages = "com.example.store.mapper")
+@MapperScan(basePackages = "com.example.store.mapping")
 public class MainConfig {
 
 
