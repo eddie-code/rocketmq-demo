@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan(basePackages = {"com.example.paya.*"})
-@MapperScan(basePackages = "com.example.paya.mapper")
+@MapperScan(basePackages = "com.example.paya.mapping")
 public class MainConfig {
 
 

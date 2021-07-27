@@ -29,7 +29,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 <!--		<rocketmq.version>4.2.0</rocketmq.version> &lt;!&ndash; 服务器是 V4_3_0, Maven使用 4.3.0 会抛出异常“No route info of this topic”的错误 &ndash;&gt;-->
-		<rocketmq.version>4.3.0</rocketmq.version> <!-- springboot2.0.2  rocketmq4.3.0-->
+		<rocketmq.version>2.0.2</rocketmq.version> <!-- springboot2.0.2  rocketmq4.4.0  从4.3.0开始支持分布式事务-->
 		<commons-fileupload.version>1.2.2</commons-fileupload.version>
 		<commons-lang3.version>3.3.1</commons-lang3.version>
 		<commons-io.version>2.4</commons-io.version>

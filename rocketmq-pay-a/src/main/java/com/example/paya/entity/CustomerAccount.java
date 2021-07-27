@@ -1,16 +1,23 @@
 package com.example.paya.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+/**
+ * @author Administrator
+ */
 @Data
 @Accessors(chain = true)
 @Table(name = "`t_customer_account`")
-public class CustomerAccount {
-    @Id
+public class CustomerAccount implements Serializable {
+
+    private static final long serialVersionUID = 6329333698300300647L;
+
+//    @Id
     @Column(name = "`account_id`")
     private String accountId;
 
