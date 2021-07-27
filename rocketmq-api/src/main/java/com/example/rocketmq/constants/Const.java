@@ -12,6 +12,7 @@ package com.example.rocketmq.constants;
 public class Const {
 
     public static final String NAMESRV_ADDR_SINGLE = "192.168.8.246:9876";
-    public static final String NAMESRV_ADDR_MASTER_SLAVE = "192.168.8.246:9876;192.168.8.247:9876";
+//    public static final String NAMESRV_ADDR_MASTER_SLAVE = "192.168.8.246:9876;192.168.8.247:9876";
+    public static final String NAMESRV_ADDR_MASTER_SLAVE = "192.168.8.108:9876;192.168.8.240:9876;192.168.8.246:9876;192.168.8.247:9876";
 
 }
