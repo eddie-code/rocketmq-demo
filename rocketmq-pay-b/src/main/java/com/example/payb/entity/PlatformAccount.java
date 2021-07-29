@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -13,7 +14,8 @@ import lombok.experimental.Accessors;
 public class PlatformAccount implements Serializable {
 
     private static final long serialVersionUID = 6736434177179025144L;
-    //    @Id
+
+    @Id
     @Column(name = "`account_id`")
     private String accountId;
 

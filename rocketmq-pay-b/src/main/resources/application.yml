@@ -17,6 +17,10 @@ logging:
   level:
     tk:
       mybatis: TRACE
+    com:
+      example:
+        payb:
+          mapping: debug
 # Enables Dubbo All Endpoints
 management:
   endpoint:
@@ -41,7 +45,7 @@ management:
         ## StatusChecker Name extras (default : empty )
         extras: load,threadpool
 mybatis:
-  mapper-locations: classpath:mapping/*.xml
+  mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.example.payb
 server:
   port: 8004

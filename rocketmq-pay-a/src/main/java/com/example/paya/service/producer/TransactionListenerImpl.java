@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author eddie.lee
@@ -30,31 +31,31 @@ public class TransactionListenerImpl implements TransactionListener {
     @Override
     public LocalTransactionState executeLocalTransaction(Message message, Object o) {
         System.out.println("------  执行本地事务单元 ------");
-        Map<String, Object> params = (Map<String, Object>) o;
-        // 当前的支付款
-        BigDecimal money = (BigDecimal) params.get("money");
-        String userId = (String) params.get("userId");
-        String orderId = (String) params.get("orderId");
-        String accountId = (String) params.get("accountId");
-        // 前置扣款成功的余额
-        BigDecimal newBalance = (BigDecimal) params.get("newBalance");
-        // 乐观锁
-        Integer currentVersion = (Integer) params.get("currentVersion");
-
-
+        CountDownLatch currentCountDown = null;
         try {
-            // updateBalance 传递当前的支付款 数据库操作：
-            Date currentTime = new Date();
-            int count = customerAccountMapper.updateBalance(accountId, newBalance, currentVersion, currentTime);
+            Map<String, Object> params = (Map<String, Object>) o;
+            String userId = (String)params.get("userId");
+            String accountId = (String)params.get("accountId");
+            String orderId = (String)params.get("orderId");
+            BigDecimal payMoney = (BigDecimal)params.get("payMoney");	//	当前的支付款
+            BigDecimal newBalance = (BigDecimal)params.get("newBalance");	//	前置扣款成功的余额
+            int currentVersion = (int)params.get("currentVersion"); // 乐观锁
+            currentCountDown = (CountDownLatch)params.get("currentCountDown");
 
+
+            //updateBalance 传递当前的支付款 数据库操作:
+            Date currentTime = new Date();
+            int count = this.customerAccountMapper.updateBalance(accountId, newBalance, currentVersion, currentTime);
             if (count == 1) {
+                currentCountDown.countDown();
                 return LocalTransactionState.COMMIT_MESSAGE;
             } else {
+                currentCountDown.countDown();
                 return LocalTransactionState.ROLLBACK_MESSAGE;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
+            currentCountDown.countDown();
             return LocalTransactionState.ROLLBACK_MESSAGE;
         }
 

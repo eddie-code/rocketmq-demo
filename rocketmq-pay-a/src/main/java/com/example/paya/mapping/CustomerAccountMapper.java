@@ -2,11 +2,16 @@ package com.example.paya.mapping;
 
 import com.example.paya.entity.CustomerAccount;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * @author eddie
+ */
+@Repository
 public interface CustomerAccountMapper extends Mapper<CustomerAccount> {
 
     /**

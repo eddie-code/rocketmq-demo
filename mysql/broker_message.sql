@@ -20,16 +20,16 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for broker_message_log
 -- ----------------------------
 DROP TABLE IF EXISTS `broker_message_log`;
-CREATE TABLE `broker_message_log`  (
-  `message_id` varchar(32) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `message` varchar(400) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `try_count` int(5) NULL DEFAULT NULL,
-  `status` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `next_retry` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
-  PRIMARY KEY (`message_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+CREATE TABLE `broker_message_log` (
+  `message_id` varchar(32) NOT NULL COMMENT '消息唯一标识',
+  `message` varchar(400) DEFAULT NULL COMMENT '消息体, json格式化',
+  `try_count` int(5) DEFAULT NULL COMMENT '重试次数',
+  `status` varchar(10) DEFAULT NULL COMMENT '状态: 0投递中 1投递成功 2投递失败 3已消费',
+  `next_retry` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '下一次重试时间',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`message_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of broker_message_log

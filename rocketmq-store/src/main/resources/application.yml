@@ -17,6 +17,10 @@ logging:
   level:
     tk:
       mybatis: TRACE
+    com:
+      example:
+        store:
+          mapping: debug
 # Enables Dubbo All Endpoints
 management:
   endpoint:

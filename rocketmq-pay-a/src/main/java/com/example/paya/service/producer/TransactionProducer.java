@@ -66,6 +66,7 @@ public class TransactionProducer implements InitializingBean {
         TransactionSendResult transactionSendResult = null;
         try {
             transactionSendResult = this.producer.sendMessageInTransaction(msg, obj);
+            System.err.println("TransactionSendResult: msg = " + msg + " obj = " + obj);
         } catch (Exception e) {
             e.printStackTrace();
         }

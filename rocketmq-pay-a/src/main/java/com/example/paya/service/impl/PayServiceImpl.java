@@ -3,8 +3,11 @@ package com.example.paya.service.impl;
 import com.example.paya.entity.CustomerAccount;
 import com.example.paya.mapping.CustomerAccountMapper;
 import com.example.paya.service.PayService;
+import com.example.paya.service.producer.CallbackService;
 import com.example.paya.service.producer.TransactionProducer;
 import com.example.paya.utils.FastJsonConvertUtil;
+import org.apache.rocketmq.client.producer.LocalTransactionState;
+import org.apache.rocketmq.client.producer.SendStatus;
 import org.apache.rocketmq.client.producer.TransactionSendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author eddie.lee
@@ -37,13 +41,16 @@ public class PayServiceImpl implements PayService {
     @Autowired
     private TransactionProducer transactionProducer;
 
+    @Autowired
+    private CallbackService callbackService;
+
     /**
      * tips: 有一定概率，会出现并发，都去查询账户余额，都去减钱，都去发送消息
      * 保障：
-     *      1. 一次性的token去重 （防止自身重覆提交）
-     *      2. redis分布式锁：防止同一时间同一账户提交操作 （低概率）
-     *          - 如果在大型电商平台，出现redis分布式锁获取失败，也必需让代码走下去
-     *      3. 获取分布式锁失败了，就需要依靠数据库的乐观锁去重
+     * 1. 一次性的token去重 （防止自身重覆提交）
+     * 2. redis分布式锁：防止同一时间同一账户提交操作 （低概率）
+     * - 如果在大型电商平台，出现redis分布式锁获取失败，也必需让代码走下去
+     * 3. 获取分布式锁失败了，就需要依靠数据库的乐观锁去重
      *
      * @param userId    用户id
      * @param orderId   订单id
@@ -95,22 +102,39 @@ public class PayServiceImpl implements PayService {
                 params.put("userId", userId);
                 params.put("orderId", orderId);
                 params.put("accountId", accountId);
-                params.put("money", money);
+                params.put("money", money); // 100
 
                 Message message = new Message(TX_PAY_TOPIC, TX_PAY_TAGS, keys, FastJsonConvertUtil.convertObjectToJSON(params).getBytes());
 
                 // 3. 执行本地事务
                 // 可能使用到的参数
+                params.put("payMoney", payMoney);
                 params.put("newBalance", newBalance);
                 params.put("currentVersion", currentVersion);
+
+                //	同步阻塞
+                CountDownLatch countDownLatch = new CountDownLatch(1);
+                params.put("currentCountDown", countDownLatch);
                 // 消息发送并且本地的事务执行（并行操作）
                 TransactionSendResult transactionSendResult = transactionProducer.transactionSendResult(message, params);
+
+                countDownLatch.await();
+
+                if (transactionSendResult.getSendStatus() == SendStatus.SEND_OK && transactionSendResult.getLocalTransactionState() == LocalTransactionState.COMMIT_MESSAGE) {
+                    //	回调 order 通知支付成功消息
+                    callbackService.sendOKMessage(orderId, userId);
+                    paymentRet = "支付成功!";
+                } else {
+                    paymentRet = "支付失败!";
+                }
+
             } else {
                 paymentRet = "余额不足！";
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+            paymentRet = "支付失败!";
         }
         return paymentRet;
     }

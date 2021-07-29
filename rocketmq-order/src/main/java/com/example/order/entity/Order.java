@@ -17,7 +17,7 @@ public class Order implements Serializable {
 
     private static final long serialVersionUID = 8196523499263987003L;
 
-//    @Id
+    @Id
     @Column(name = "`order_id`")
     private String orderId;
 
