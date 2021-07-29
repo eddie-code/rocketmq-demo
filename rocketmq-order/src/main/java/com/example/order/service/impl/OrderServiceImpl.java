@@ -106,6 +106,13 @@ public class OrderServiceImpl implements OrderService {
     public static final String PKG_TOPIC = "pkg_topic";
 
     public static final String PKG_TAGS = "pkg";
+
+    /**
+     * 顺序消息： <br>
+     *     模拟订单之后发送物流流程： <br>
+     *         1. 创建包裹
+     *         2. 发送物流通知
+     */
     @Override
     public void sendOrderlyMessage4Pkg(String userId, String orderId) {
         List<Message> messageList = new ArrayList<>();
@@ -135,6 +142,7 @@ public class OrderServiceImpl implements OrderService {
         //  supplier_id
 
         Order order = orderMapper.selectByPrimaryKey(orderId);
+        // 供应商id
         int messageQueueNumber = Integer.parseInt(order.getSupplierId());
 
         //对应的顺序消息的生产者 把messageList 发出去

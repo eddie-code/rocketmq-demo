@@ -1,6 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
+ Source Server         : EDDIE-MYSQL
  Source Server Type    : MySQL
  Source Server Version : 50731
  Source Host           : 192.168.8.100:61337
@@ -10,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 20/07/2021 15:40:17
+ Date: 29/07/2021 21:36:19
 */
 
 SET NAMES utf8mb4;
@@ -37,5 +38,6 @@ CREATE TABLE `t_store`  (
 -- ----------------------------
 -- Records of t_store
 -- ----------------------------
+INSERT INTO `t_store` VALUES ('00001', '001', '1', 'iPhone13', 0, 1, 'eddie', '2021-07-22 19:41:10', 'eddie', '2021-07-22 22:45:32');
 
 SET FOREIGN_KEY_CHECKS = 1;

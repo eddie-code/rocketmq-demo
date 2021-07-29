@@ -47,6 +47,7 @@ public class OrderlyProducer {
         this.producer.shutdown();
     }
 
+    // messageQueueNumber 用途就是 topic 用作队列标识
     public void sendOrderlyMessages(List<Message> messageList, int messageQueueNumber) {
         for(Message me : messageList) {
             try {

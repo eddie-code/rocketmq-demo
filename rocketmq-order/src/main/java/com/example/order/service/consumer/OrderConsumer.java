@@ -84,7 +84,10 @@ public class OrderConsumer {
                 if (status.equals(OrderStatus.ORDER_PAYED.getValue())) {
                     // 00:14：21
                     int count = orderMapper.updateOrderStatus(orderId, status, "eddie", currentTime);
+                    // 00:46:55
+                    // 更新状态成功了，之后
                     if (count == 1) {
+                        // 顺序消息相关 -- Start
                         System.err.println("userId: " + userId + " orderId: " + orderId);
                         orderService.sendOrderlyMessage4Pkg(userId, orderId);
                     }

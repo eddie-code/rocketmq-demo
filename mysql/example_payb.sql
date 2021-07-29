@@ -1,6 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
+ Source Server         : EDDIE-MYSQL
  Source Server Type    : MySQL
  Source Server Version : 50731
  Source Host           : 192.168.8.100:61337
@@ -10,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 20/07/2021 15:39:59
+ Date: 29/07/2021 21:35:57
 */
 
 SET NAMES utf8mb4;
@@ -34,6 +35,6 @@ CREATE TABLE `t_platform_account`  (
 -- ----------------------------
 -- Records of t_platform_account
 -- ----------------------------
-INSERT INTO `t_platform_account` VALUES ('platform001', '654321', '2021-07-19 16:32:47', 111.00, 0, '2021-07-19 16:32:56', '2021-07-19 16:32:58');
+INSERT INTO `t_platform_account` VALUES ('platform001', '654321', '2021-07-29 21:34:10', 111.00, 0, '2021-07-19 16:32:56', '2021-07-29 21:34:10');
 
 SET FOREIGN_KEY_CHECKS = 1;

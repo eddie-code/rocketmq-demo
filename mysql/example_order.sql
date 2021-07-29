@@ -1,6 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
+ Source Server         : EDDIE-MYSQL
  Source Server Type    : MySQL
  Source Server Version : 50731
  Source Host           : 192.168.8.100:61337
@@ -10,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 20/07/2021 15:39:41
+ Date: 29/07/2021 21:35:33
 */
 
 SET NAMES utf8mb4;
@@ -41,5 +42,6 @@ CREATE TABLE `t_order`  (
 -- ----------------------------
 -- Records of t_order
 -- ----------------------------
+INSERT INTO `t_order` VALUES ('b09ff2bc-a9a4-4ee1-9728-3158fc97', '1', '1001', '001', '001', '1', '001', '1', '', 'eddie', '2021-07-22 22:42:56', 'eddie', '2021-07-29 21:34:09');
 
 SET FOREIGN_KEY_CHECKS = 1;
