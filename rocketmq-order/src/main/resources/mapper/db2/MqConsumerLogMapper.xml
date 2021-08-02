@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.order.mapping.db2.MqConsumerLogMapper">
+  <resultMap id="BaseResultMap" type="com.example.order.entity.MqConsumerLog">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="message_id" jdbcType="VARCHAR" property="messageId" />
+    <result column="topic" jdbcType="VARCHAR" property="topic" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="keys" jdbcType="VARCHAR" property="keys" />
+    <result column="message_body" jdbcType="VARCHAR" property="messageBody" />
+    <result column="try_count" jdbcType="INTEGER" property="tryCount" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="exception" jdbcType="LONGVARCHAR" property="exception" />
+  </resultMap>
+
+  <delete id="updatetryCountByVersion">
+    UPDATE mq_consumer_log mcl
+      SET try_count = try_count + 1,
+      version = version + 1,
+      status = #{status},
+      update_time = #{updateTime}
+    WHERE
+      mcl.topic = #{topic}
+      AND mcl.tags = #{tags}
+      AND mcl.keys = #{keys}
+      AND mcl.version = #{version}
+  </delete>
+
+</mapper>

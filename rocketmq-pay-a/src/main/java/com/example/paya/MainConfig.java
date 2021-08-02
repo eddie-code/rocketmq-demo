@@ -15,7 +15,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @Configuration
 @ComponentScan(basePackages = {"com.example.paya.*"})
-@MapperScan(basePackages = "com.example.paya.mapping")
+//@MapperScan(basePackages = "com.example.paya.mapping")
 public class MainConfig {
 
 

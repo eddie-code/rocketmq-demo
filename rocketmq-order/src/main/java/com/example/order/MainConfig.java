@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan(basePackages = {"com.example.order.*"})
-@MapperScan(basePackages = "com.example.order.mapping")
+//@MapperScan(basePackages = "com.example.order.mapping")
 public class MainConfig {
 
 

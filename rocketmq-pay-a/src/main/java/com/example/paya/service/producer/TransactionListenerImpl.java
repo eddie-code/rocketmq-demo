@@ -1,6 +1,6 @@
 package com.example.paya.service.producer;
 
-import com.example.paya.mapping.CustomerAccountMapper;
+import com.example.paya.mapping.db1.CustomerAccountMapper;
 import org.apache.rocketmq.client.producer.LocalTransactionState;
 import org.apache.rocketmq.client.producer.TransactionListener;
 import org.apache.rocketmq.common.message.Message;

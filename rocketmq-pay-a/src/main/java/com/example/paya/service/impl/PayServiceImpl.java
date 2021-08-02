@@ -1,7 +1,7 @@
 package com.example.paya.service.impl;
 
 import com.example.paya.entity.CustomerAccount;
-import com.example.paya.mapping.CustomerAccountMapper;
+import com.example.paya.mapping.db1.CustomerAccountMapper;
 import com.example.paya.service.PayService;
 import com.example.paya.service.producer.CallbackService;
 import com.example.paya.service.producer.TransactionProducer;

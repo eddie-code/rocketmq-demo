@@ -4,3 +4,4 @@ CREATE DATABASE example_paya;
 CREATE DATABASE example_payb;
 CREATE DATABASE example_pkg;
 CREATE DATABASE example_store;
+CREATE DATABASE example_msglog;

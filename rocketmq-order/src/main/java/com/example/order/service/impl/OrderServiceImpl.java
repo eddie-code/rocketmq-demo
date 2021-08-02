@@ -3,7 +3,7 @@ package com.example.order.service.impl;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.example.order.constants.OrderStatus;
 import com.example.order.entity.Order;
-import com.example.order.mapping.OrderMapper;
+import com.example.order.mapping.db1.OrderMapper;
 import com.example.order.service.OrderService;
 import com.example.order.service.producer.OrderlyProducer;
 import com.example.order.utils.FastJsonConvertUtil;

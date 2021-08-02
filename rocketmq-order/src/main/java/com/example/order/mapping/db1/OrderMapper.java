@@ -1,4 +1,4 @@
-package com.example.order.mapping;
+package com.example.order.mapping.db1;
 
 import com.example.order.entity.Order;
 import org.apache.ibatis.annotations.Param;

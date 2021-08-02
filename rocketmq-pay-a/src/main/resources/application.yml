@@ -45,7 +45,7 @@ management:
         ## StatusChecker Name extras (default : empty )
         extras: load,threadpool
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+#  mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.example.paya
 server:
   port: 8003
@@ -53,27 +53,39 @@ server:
     context-path: /
 spring:
   datasource:
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-    driver-class-name: com.mysql.jdbc.Driver
-    filters: stat,wall,log4j
-    initialSize: 5
-    maxActive: 100
-    maxIdle: 10
-    maxPoolPreparedStatementPerConnectionSize: 20
-    maxWait: 60000
-    minEvictableIdleTimeMillis: 300000
-    minIdle: 1
-    poolPreparedStatements: true
-    testOnBorrow: false
-    testOnReturn: false
-    testWhileIdle: true
-    timeBetweenEvictionRunsMillis: 60000
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.8.100:61337/example_paya?characterEncoding=UTF-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true&useSSL=false
-    useGlobalDataSourceStat: true
-    username: root
-    password: 123456
-    validationQuery: SELECT 1 FROM DUAL
+    db1: # 数据源1
+      jdbc-url: jdbc:mysql://192.168.8.100:61337/example_paya?characterEncoding=UTF-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true&useSSL=false
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    db2: # 数据源2
+      jdbc-url: jdbc:mysql://192.168.8.100:61337/example_msglog?characterEncoding=UTF-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true&useSSL=false
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+#spring:
+#  datasource:
+#    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+#    driver-class-name: com.mysql.jdbc.Driver
+#    filters: stat,wall,log4j
+#    initialSize: 5
+#    maxActive: 100
+#    maxIdle: 10
+#    maxPoolPreparedStatementPerConnectionSize: 20
+#    maxWait: 60000
+#    minEvictableIdleTimeMillis: 300000
+#    minIdle: 1
+#    poolPreparedStatements: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    testWhileIdle: true
+#    timeBetweenEvictionRunsMillis: 60000
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    url: jdbc:mysql://192.168.8.100:61337/example_paya?characterEncoding=UTF-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true&useSSL=false
+#    useGlobalDataSourceStat: true
+#    username: root
+#    password: 123456
+#    validationQuery: SELECT 1 FROM DUAL
   http:
     encoding:
       charset: UTF-8

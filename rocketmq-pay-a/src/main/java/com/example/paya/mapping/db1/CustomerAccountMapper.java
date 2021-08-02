@@ -1,4 +1,4 @@
-package com.example.paya.mapping;
+package com.example.paya.mapping.db1;
 
 import com.example.paya.entity.CustomerAccount;
 import org.apache.ibatis.annotations.Param;
